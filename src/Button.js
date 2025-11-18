@@ -1,7 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
-
-
 
 export default class Button extends React.Component {
     constructor(props) {
@@ -16,7 +13,7 @@ export default class Button extends React.Component {
         this.clicked = this.clicked.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
 
         
         if(this.props.num !== undefined ){
@@ -26,18 +23,11 @@ export default class Button extends React.Component {
 
     }
 
-    componentWillReceiveProps(nextProps) {
-
-        if (nextProps.num !== undefined) {
-            this.setState({ num: nextProps.num });
+    componentDidUpdate(prevProps) {
+        if (this.props.num !== prevProps.num) {
+            this.setState({ num: this.props.num });
         }
     }
-    // componentWillReceiveProps(nextProps) {
-
-    //     if (nextProps.num) {
-    //         this.setState({ num: nextProps.num });
-    //     }
-    // }
     
     clicked(){
         if(this.state.num < 20){
