@@ -1,5 +1,4 @@
 import React from 'react';
-import { render } from 'react-dom';
 import Button from 'Button';
 
 export default class Column extends React.Component {
@@ -13,7 +12,7 @@ export default class Column extends React.Component {
         this.randomNumber = this.randomNumber.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.randomNumber();
     }
 

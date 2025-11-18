@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Column from 'Column';
 
 
@@ -13,7 +13,7 @@ class Example extends React.Component {
 
     }
 
-    componentWillMount(){
+    componentDidMount(){
     }
 
 
@@ -29,4 +29,6 @@ class Example extends React.Component {
   }
 }
 
-render(<Example />, document.getElementById('root'));
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<Example />);
