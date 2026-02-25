@@ -1,68 +1,33 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React, { useState, useEffect } from 'react';
 
+const Button = ({ num: initialNum, color }) => {
+    const [num, setNum] = useState(initialNum !== undefined ? initialNum : 'Back');
 
-
-export default class Button extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = 
-            {
-                num:'Back'
-            }
-        
-
-        this.clicked = this.clicked.bind(this);
-    }
-
-    componentWillMount(){
-
-        
-        if(this.props.num !== undefined ){
-            this.setState({ num: this.props.num });
+    useEffect(() => {
+        if (initialNum !== undefined) {
+            setNum(initialNum);
         }
+    }, [initialNum]);
 
-
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-        if (nextProps.num !== undefined) {
-            this.setState({ num: nextProps.num });
+    const clicked = () => {
+        if (typeof num === 'number' && num < 20) {
+            setNum(prev => prev + 1);
         }
-    }
-    // componentWillReceiveProps(nextProps) {
+    };
 
-    //     if (nextProps.num) {
-    //         this.setState({ num: nextProps.num });
-    //     }
-    // }
-    
-    clicked(){
-        if(this.state.num < 20){
-            this.setState((state) => ({ num: state.num + 1 }));
-        }
-    }
-    
-
-  render() {
-      let text = this.state.num;
-      return (
+    return (
          <div>
              A Button
-              <button onClick={() => {
-                  this.clicked()
-              }} style={{
+              <button onClick={clicked} style={{
                       backgroundColor: 'white',
                       borderRadius: '15px',
                   padding: '5px 5px',
-                  border: '2px solid '+this.props.color
+                  border: '2px solid '+ color
               }}>
-                  {typeof this.state.num == 'number' ? this.props.color + this.state.num : this.state.num}
+                  {typeof num === 'number' ? color + num : num}
               </button> 
          </div>
-      );
-    };
-}
+    );
+};
 
+export default Button;
